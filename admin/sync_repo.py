@@ -11,12 +11,12 @@ os.chdir(local_repo_path)
 try:
     # Pull changes from the remote repository
     subprocess.run(["git", "pull"])
-
-    # Add all changes, commit, and push to GitHub
+    
+    # Add all changes, commit, and push to GitHub (use 'main' instead of 'master')
     subprocess.run(["git", "add", "."])
     subprocess.run(["git", "commit", "-m", "Automated commit"])
-    subprocess.run(["git", "push", "origin", "master"])
-
+    subprocess.run(["git", "push", "origin", "main"])  # Change 'master' to 'main'
+    
     print("Sync completed successfully!")
 except Exception as e:
-    print("Error:", e)
+    print("Error:", str(e))
