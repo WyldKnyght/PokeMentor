@@ -1,0 +1,46 @@
+card_object_attributes,array,type,description,example
+id,,string,Unique identifier for the object.,swsh4-25
+name,,string,The name of the card.,Charizard
+supertype ,,string,"The supertype of the card, such as Pokémon, Energy, or Trainer.",Pokémon
+subtypes,,list(string),"A list of subtypes, such as Basic, EX, Mega, Rapid Strike, etc.",Stage 2
+level ,,string,The level of the card. This only pertains to cards from older sets and those of supertype Pokémon.,
+hp,,string,The hit points of the card.,170
+types,,list(string),"The energy types for a card, such as Fire, Water, Grass, etc.",Fire
+evolvesFrom,,string,Which Pokémon this card evolves from.,Charmeleon
+evolvesTo,,list(string),"Which Pokémon this card evolves to. Can be multiple, for example, Eevee.",
+rules list,,list(string),"Any rules associated with the card. For example, VMAX rules, Mega rules, or various trainer rules.",
+ancientTrait,,array,The ancient trait for a given card. An ancient trait has the following fields:,
+,name,string,The name of the ancient trait,
+,text,string,The text value of the ancient trait,
+abilities,,list(array),One or more abilities for a given card. An ability has the following fields:,
+,name,string,The name of the ability,Battle Sense
+,text,string,The text value of the ability,"Once during your turn, you may look at the top 3 cards of your deck and put 1 of them into your hand. Discard the other cards."
+,type,string,"The type of the ability, such as Ability or Pokémon-Power",Ability
+attacks,,list(array),One or more attacks for a given card. An attack has the following fields:,
+,cost,list(string),The cost of the attack represented by a list of energy types.,"Fire, Fire"
+,name,string,The name of the attack,Royal Blaze
+,text,string,The text or description associated with the attack,This attack does 50 more damage for each Leon card in your discard pile.
+,damage,string,The damage amount of the attack,100+
+,convertedEnergyCost ,integer,"The total cost of the attack. For example, if it costs 2 fire energy, the converted energy cost is simply 2.",2
+weaknesses,,list(array),One or more weaknesses for a given card. A weakness has the following fields:,
+,type,string,"The type of weakness, such as Fire or Water.",Water
+,value,string,The value of the weakness,x2
+resistances,,list(array),One or more resistances for a given card. A resistance has the following fields:,
+,type,string,"The type of resistance, such as Fire or Water.",
+,value,string,The value of the resistance,
+retreatCost,,list(string),"A list of costs it takes to retreat and return the card to your bench. Each cost is an energy type, such as Water or Fire.","Colorless, Colorless, Colorless"
+convertedRetreatCost,,integer,"The converted retreat cost for a card is the count of energy types found within the retreatCost field. For example, [""Fire"", ""Water""] has a converted retreat cost of 2.",3
+** set,,array,The set details embedded into the card. See the set object for more details.,
+number,,string,The number of the card.,25
+artist,,string,The artist of the card.,Ryuta Fuse
+rarity ,,string,"The rarity of the card, such as ""Common"" or ""Rare Rainbow"".",Rara
+flavorText,,string,The flavor text of the card. This is the text that can be found on some Pokémon cards that is usually italicized near the bottom of the card.,It spits fire that is hot enough to melt boulders. It may cause forest fires by blowing flames
+nationalPokedexNumbers,,list(integer),The national pokedex numbers associated with any Pokémon featured on a given card.,6
+legalities,,array,"The legalities for a given card. A legality will not be present in the hash if it is not legal. If it is legal or banned, it will be present.",
+,standard,string,"The legality ruling for Standard. Can be either Legal, Banned, or not present.",Legal
+,expanded,string,"The legality ruling for Expanded. Can be either Legal, Banned, or not present.",Legal
+,unlimited,string,"The legality ruling for Unlimited. Can be either Legal, Banned, or not present.",Legal
+regulationMark,,string,A letter symbol found on each card that identifies whether it is legal to use in tournament play. Regulation marks were introduced on cards in the Sword & Shield Series.,
+images,,array,The images for a card.,
+,small,string,"A smaller, lower-res image for a card. This is a URL.",https://images.pokemontcg.io/swsh4/25.png
+,large,string,"A larger, higher-res image for a card. This is a URL.",https://images.pokemontcg.io/swsh4/25_hires.png
