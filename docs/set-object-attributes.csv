@@ -1,0 +1,16 @@
+﻿set_object,array,type,description,example
+id,,string,# Unique identifier for the object.,swsh1
+name,,string,# The name of the set.,Sword & Shield
+series,,string,"# The series the set belongs to, like Sword and Shield or Base.",Sword & Shield
+printedTotal,,integer,# The number printed on the card that represents the total. This total does not include secret rares.,202
+total,,integer,"# The total number of cards in the set, including secret rares, alternate art, etc.",216
+legalities,,array,"# The legalities of the set. If a given format is not legal, it will not appear in the hash. This is a hash with the following fields:",
+,standard,string,# The standard game format. Possible values are Legal.,Legal
+,expanded,string,# The expanded game format. Possible values are Legal.,Legal
+,unlimited,string,# The unlimited game format. Possible values are Legal.,Legal
+ptcgoCode,,string,# The code the Pokémon Trading Card Game Online uses to identify a set.,SSH
+releaseDate,,string,# The date the set was released (in the USA). Format is YYYY/MM/DD.,2020/02/07
+updatedAt,,string,# The date and time the set was updated. Format is YYYY/MM/DD HH:MM:SS.,2020/08/14 9:35:00
+images,,array,"# Any images associated with the set, such as symbol and logo. This is a hash with the following fields:",
+,symbol,string,# web url for symbol image,https://images.pokemontcg.io/swsh1/symbol.png
+,logo,string,# web url for logo image,https://images.pokemontcg.io/swsh1/logo.png

@@ -1,0 +1,44 @@
+Required Data types
+
+1. **User Data:**
+   - This can include user profiles, preferences, and playstyle information.
+   - You can allow users to create accounts or profiles within your system and collect data like their favorite Pokémon, preferred card types, and play history.
+    - Play Style
+    - Favorite Character/Card
+    - Favorite Card Tpe (eg Water, Fire, etc)
+
+2. **Tournament and Competitive Data:**
+   - To provide insights into the metagame, consider collecting data on competitive Pokémon TCG tournaments and matches. This data can include deck compositions, strategies, and tournament results.
+   - Accessing tournament data may require scraping official Pokémon TCG tournament websites or using APIs if available.
+
+3. **Card Price and Availability Data:**
+   - Include information about the price and availability of Pokémon TCG cards. This data can help users make informed decisions about card purchases and trades.
+   - You can integrate with APIs or third-party services that provide pricing and availability data for Pokémon TCG cards.
+
+4. **Card Rarity and Set Information:**
+   - Besides card attributes, include data about card rarity, set information, release dates, and expansion sets. This data is crucial for understanding card availability and collecting trends.
+   - This information can often be obtained from official Pokémon TCG websites or APIs.
+
+5. **Card Interactions and Strategies:**
+   - Gather data or information about card interactions, combos, and popular deck strategies. This data can help the recommender system understand how cards work together and provide more informed recommendations.
+   - Curate strategy guides or tutorials that explain different deck archetypes and card interactions.
+
+6. **Metagame Analysis:**
+   - Continuously collect and update data on the current metagame, including popular decks, card usage statistics, and tournament results. This can be crucial for providing timely recommendations.
+   - Use historical metagame data to identify trends and predict potential shifts in the metagame.
+
+7. **User Feedback and Ratings:**
+   - If users can provide feedback and ratings for recommended decks or cards, collect and analyze this data to improve the accuracy of future recommendations.
+   - Implement a feedback mechanism that allows users to rate and review recommended decks.
+
+8. **AI Model Training Data:**
+   - If you plan to use machine learning models for recommendation, you'll need a dataset of historical user interactions with cards and decks. This data is used to train the recommendation algorithms.
+   - You may need to create synthetic user interactions or collect user behavior data within your application.
+
+9. **Legal and Ethical Compliance Data:**
+   - Ensure you comply with legal and ethical requirements when collecting and storing user data. Familiarize yourself with data privacy regulations and guidelines applicable to your project and region.
+
+10. **Documentation and Metadata:**
+    - Create and maintain documentation that describes the data sources, data formats, and data update schedules. This documentation will be helpful for future project development and maintenance.
+
+Remember to respect data privacy and security regulations when collecting and storing user-related data, and provide clear information to users about how their data will be used and protected. Incorporating a variety of data sources can enhance the functionality and usefulness of your AI-Powered Pokémon Card Recommender.

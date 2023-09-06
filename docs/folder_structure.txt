@@ -1,0 +1,45 @@
+AI-Pokemon-Card-Recommender/
+│
+├── data/                       # Data files and datasets
+│   ├── card_data.csv           # Pokémon TCG card information
+│   ├── tournament_data.csv     # Historical tournament data
+│   └── ...                     # Additional data files
+│
+├── models/                     # Model files and checkpoints
+│   ├── nlp_model.pth           # Saved NLP model weights
+│   ├── recommender_model.pth   # Saved recommendation model weights
+│   └── ...                     # Other model files
+│
+├── src/                        # Source code
+│   ├── chatbot.py              # Chatbot interface logic
+│   ├── recommendation.py       # Recommendation engine
+│   ├── preprocessing.py        # Text preprocessing utilities
+│   ├── metagame_analysis.py    # Metagame analysis and insights
+│   ├── data_loader.py          # Data loading and database integration
+│   ├── main.py                 # Main application entry point
+│   └── ...
+│
+├── templates/                  # HTML templates (if building a web interface)
+│   ├── index.html              # Main chat interface template
+│   ├── results.html            # Template for displaying card recommendations
+│   └── ...
+│
+├── static/                     # Static assets (CSS, JS, images, etc.)
+│   ├── css/                    # CSS files
+│   ├── js/                     # JavaScript files
+│   ├── images/                 # Image assets
+│   └── ...
+│
+├── docs/                       # Documentation and user guides
+│   ├── user_guide.md           # User guide for the chatbot
+│   ├── developer_docs.md       # Documentation for developers
+│   └── ...
+│
+├── config/                     # Configuration files
+│   ├── config.json             # Project configuration settings
+│   └── ...
+│
+├── requirements.txt            # Python dependencies for the project
+├── README.md                   # Project README with instructions
+├── LICENSE                     # Project license file
+└── ...
