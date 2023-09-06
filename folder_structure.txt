@@ -1,0 +1,43 @@
+m:\DEV_Projects\PokeMentor
+├── .gitignore
+├── LICENSE
+├── README.md
+├── admin
+│   ├── create_folder_structure.py
+│   ├── folder_structure.txt
+│   ├── sync_pokemon_tcg_data_repo.py
+│   └── sync_repo.py
+├── config
+├── data
+│   ├── deck_builder
+│   ├── parsed_card_data
+│   └── pokemon_tcg_rules
+├── docs
+│   ├── data_collection
+│   │   ├── card-object-attributes.csv
+│   │   ├── data_collection.txt
+│   │   ├── pokemon-tcg-data.txt
+│   │   ├── set-object-attributes.csv
+│   │   └── user_data_types.txt
+│   ├── folder_structure.txt
+│   └── project_plan.md
+├── folder_structure.txt
+├── models
+├── requirements.txt
+├── src
+│   ├── __init__.py
+│   ├── attribute_patterns.py
+│   ├── create_pandas_schema.py
+│   ├── create_parsed_card_data_db.py
+│   ├── main.py
+│   ├── parse_card_data.py
+│   ├── parser
+│   │   └── card_parser.py
+│   └── utils
+│       └── schema_utils.py
+├── static
+├── templates
+├── tree.txt
+└── tree2.txt
+
+Script last modified: 2023-09-06 20:21:50

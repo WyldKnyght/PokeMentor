@@ -1,5 +1,10 @@
 AI-Pokemon-Card-Recommender/
 │
+│
+├── Admin/
+│   ├── utility codes           # Sync repos 
+│   └── ...                     # Additional admin files
+│
 ├── data/                       # Data files and datasets
 │   ├── card_data.csv           # Pokémon TCG card information
 │   ├── tournament_data.csv     # Historical tournament data
