@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 ﻿card_object_attributes,array,type,description,example
+=======
+card_object_attributes,array,type,description,example
+>>>>>>> 775f3b0e69e2d8eb3980ae38eb7dd2bbb986db39
 id,,string,Unique identifier for the object.,swsh4-25
 name,,string,The name of the card.,Charizard
 supertype ,,string,"The supertype of the card, such as Pokémon, Energy, or Trainer.",Pokémon

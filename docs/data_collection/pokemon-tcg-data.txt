@@ -1,1 +1,3 @@
 Pokemon TCG Data is pulled from Pokémon TCG Developers
+
+In the \data\ folder clone the https://github.com/PokemonTCG/pokemon-tcg-data repo to be able to update card and set data
