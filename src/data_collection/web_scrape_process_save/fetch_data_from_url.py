@@ -8,9 +8,8 @@ def fetch_data_from_url(url):
         response = requests.get(url)
         if response.status_code == 200:
             return response.text  # Return the HTML content of the webpage
-        else:
-            print(f"Failed to fetch {url}. Status code: {response.status_code}")
-            return None
+        print(f"Failed to fetch {url}. Status code: {response.status_code}")
+        return None
     except Exception as e:
         print(f"An error occurred while fetching data from {url}: {e}")
         return None
@@ -48,8 +47,7 @@ def main():
     urls = [row[0] for row in cursor.fetchall()]
 
     for url in urls:
-        data = fetch_data_from_url(url)
-        if data:
+        if data := fetch_data_from_url(url):
             # Store the fetched data in the database
             store_data_in_database(url, data, database_path)
 
