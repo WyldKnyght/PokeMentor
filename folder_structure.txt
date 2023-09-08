@@ -7,16 +7,19 @@ M:\DEV_Projects\PokeMentor
 │   ├── sync_pokemon_tcg_data_repo.py
 │   └── sync_repo.py
 ├── config
+│   ├── .env
+│   └── dot-env
 ├── data
 │   ├── deck_builder
 │   ├── parsed_card_data
 │   └── pokemon_tcg_rules
-│       ├── pal_rulebook_en.pdf
 │       └── pokemon_tcg_rulebook.db
 ├── docs
 │   ├── data_collection
 │   │   ├── card-object-attributes.csv
 │   │   ├── data_collection.txt
+│   │   ├── how_to_play_urls.txt
+│   │   ├── pal_rulebook_en.pdf
 │   │   ├── pokemon-tcg-data.txt
 │   │   ├── set-object-attributes.csv
 │   │   └── user_data_types.txt
@@ -30,15 +33,17 @@ M:\DEV_Projects\PokeMentor
 │   ├── data_collection
 │   │   ├── attribute_patterns.py
 │   │   ├── create_pandas_schema.py
-│   │   ├── create_parsed_card_data_db.py
 │   │   ├── extract_official_rulebook.py
-│   │   ├── parse_card_data.py
-│   │   ├── parser
-│   │   │   └── card_parser.py
-│   │   └── utils
-│   │       └── schema_utils.py
+│   │   ├── parse_card_text_and fields.py
+│   │   ├── store_parsed_data_db.py
+│   │   ├── utils
+│   │   │   └── schema_utils.py
+│   │   └── web_scrape_process_save
+│   │       ├── extract_game_play_from web.py
+│   │       ├── fetch_data_from_url.py
+│   │       └── validate_url_text_list.py
 │   └── main.py
 ├── static
 └── templates
 
-Script last modified: 2023-09-07 23:03:53
+Script last modified: 2023-09-08 17:23:22

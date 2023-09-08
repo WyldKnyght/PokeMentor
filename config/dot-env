@@ -1,0 +1,19 @@
+### This section manages the paths for the data_collection phase
+
+#Main Database (Containing Rules Data):
+# Path to the main database containing data on rules to play pokemon 
+MAIN_RULEBOOK_DB_PATH="M:\DEV_Projects\PokeMentor\data\pokemon_tcg_rules\pokemon_tcg_rulebook.db"
+
+## Official Rulebook PDf File
+# PDF file containing the official Pokemon TCG Rulebook
+OFFICIAL_PDF_RULEBOOK_PATH="M:\DEV_Projects\PokeMentor\docs\data_collection\pal_rulebook_en.pdf"
+
+## How to play Pokemon TCG Web URLS
+# Holding Database (For Raw Data from URLs):
+RAW_DATA_DATABASE_PATH="M:\DEV_Projects\PokeMentor\data\pokemon_tcg_rules\raw_data_from_url.db"
+
+# Text File Containing URLs on How to Play Pokemon TCG
+HOW_TO_PLAY_URL_LIST_FILE_PATH="M:\DEV_Projects\PokeMentor\docs\data_collection\how_to_play_urls.txt"
+
+# Validated URLS database, from text file
+HOW_TO_PLAY_URLS_DATABASE_PATH="M:\DEV_Projects\PokeMentor\data\pokemon_tcg_rules\how_to_play_urls.db"

@@ -1,15 +1,14 @@
-# src/create_pandas_schema.py
-import os
 import pandas as pd
 import json
-from utils.schema_utils import get_set_schema, get_card_schema, load_set_attributes_data, create_empty_card_dataframe, extract_valid_card_data
+from utils.schema_utils import get_set_schema, get_card_schema, load_set_attributes_data, create_empty_card_dataframe
+from pathlib import Path
 
 # Get the absolute path of the current directory
-current_dir = os.path.dirname(os.path.abspath(__file__))
+current_dir = Path(__file__).resolve().parent
 
-# Adjust the path to the JSON data files to go up one level and then to the data folder
-set_data_path = os.path.join(current_dir, '..', 'data', 'pokemon-tcg-data', 'sets', 'en.json')
-card_data_folder = os.path.join(current_dir, '..', 'data', 'pokemon-tcg-data', 'cards', 'en')
+# Adjust the path to the JSON data files using pathlib
+set_data_path = current_dir.parent / 'data' / 'pokemon-tcg-data' / 'sets' / 'en.json'
+card_data_folder = current_dir.parent / 'data' / 'pokemon-tcg-data' / 'cards' / 'en'
 
 # Load set schema and card schema using functions from schema_utils.py
 set_schema = get_set_schema()
@@ -25,9 +24,9 @@ card_df = create_empty_card_dataframe(card_schema)
 valid_card_data_list = []
 
 # Iterate through JSON files in the card data folder
-for filename in os.listdir(card_data_folder):
-    if filename.endswith('.json'):
-        card_attributes_json_path = os.path.join(card_data_folder, filename)
+for entry in card_data_folder.iterdir():
+    if entry.name.endswith('.json') and entry.is_file():
+        card_attributes_json_path = entry
 
         # Load card attributes data from a JSON file
         with open(card_attributes_json_path, 'r', encoding='utf-8') as card_json_file:
@@ -35,11 +34,14 @@ for filename in os.listdir(card_data_folder):
 
         # Check if card_attributes_data is not None
         if card_attributes_data is not None:
-            # Extract valid card data using the schema
-            valid_card_data_list.extend(extract_valid_card_data(card_schema, set_schema, card_attributes_data))
+            # Use pandas.json_normalize() to extract valid card data
+            valid_card_data_list.append(pd.json_normalize(card_attributes_data))
+
+# Concatenate the list of DataFrames into a single DataFrame
+valid_card_data_df = pd.concat(valid_card_data_list, ignore_index=True)
 
 # Create a DataFrame from the list of valid card data
-card_df = pd.DataFrame(valid_card_data_list)
+card_df = pd.DataFrame(valid_card_data_df)
 
-# Save the DataFrame to a CSV file (you can change the format as needed)
-card_df.to_csv('card_schema.csv', index=False)
+# Save the DataFrame to a Parquet file for better performance and storage efficiency
+card_df.to_parquet('card_schema.parquet', index=False)

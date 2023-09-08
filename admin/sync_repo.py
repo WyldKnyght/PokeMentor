@@ -8,15 +8,7 @@ github_repo_url = "https://github.com/WyldKnyght/PokeMentor"
 # Change to the repository directory
 os.chdir(local_repo_path)
 
-try:
-    # Pull changes from the remote repository
-    subprocess.run(["git", "pull"])
+# Pull changes from the remote repository and push local changes
+subprocess.run(f"git pull && git add . && git commit -m 'Automated commit' && git push origin main", shell=True, check=True)
 
-    # Add all changes, commit, and push to GitHub (use 'main' instead of 'master')
-    subprocess.run(["git", "add", "."])
-    subprocess.run(["git", "commit", "-m", "Automated commit"])
-    subprocess.run(["git", "push", "origin", "main"])  # Change 'master' to 'main'
-
-    print("Sync completed successfully!")
-except Exception as e:
-    print("Error:", e)
+print("Sync completed successfully!")

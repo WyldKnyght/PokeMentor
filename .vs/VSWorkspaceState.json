@@ -2,10 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\admin",
+    "\\config",
     "\\data",
+    "\\data\\deck_builder",
+    "\\data\\parsed_card_data",
     "\\data\\pokemon_tcg_rules",
-    "\\src\\data_collection"
+    "\\src",
+    "\\src\\data_collection",
+    "\\src\\data_collection\\web_scrape_process_save"
   ],
-  "SelectedNode": "\\admin\\sync_pokemon_tcg_data_repo.py",
+  "SelectedNode": "\\src\\data_collection\\web_scrape_process_save\\validate_url_text_list.py",
   "PreviewInSolutionExplorer": false
 }
