@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\admin",
+    "\\data",
+    "\\data\\pokemon_tcg_rules",
+    "\\src\\data_collection"
+  ],
+  "SelectedNode": "\\admin\\sync_pokemon_tcg_data_repo.py",
+  "PreviewInSolutionExplorer": false
+}
