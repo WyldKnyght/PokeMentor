@@ -1,4 +1,4 @@
 {
   "SuppressEnvironmentCreationPrompt": true,
-  "Interpreter": "Global|VisualStudio|PokeMentor.venv"
+  "Interpreter": "Global|VisualStudio|Scripts"
 }

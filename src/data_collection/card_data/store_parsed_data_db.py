@@ -1,7 +1,7 @@
 import sqlite3
 import re
 import os
-import attribute_patterns as patterns
+from src.data_collection.card_data import attribute_patterns as patterns  # Updated import path
 
 # Function to create or connect to the SQLite database
 def create_database(db_path):
@@ -44,13 +44,14 @@ def create_database(db_path):
 # Main function to parse and store card data in the database
 def main():
     # Define the path to the database
-    db_path = r'\data\parsed_card_data\pokemon_cards.db'
+    db_path = os.path.join(os.getcwd(), 'data', 'parsed_card_data', 'pokemon_cards.db')
 
     # Create or connect to the database
     conn = create_database(db_path)
 
     # Read the card text data (replace with your data source)
-    with open(r'\src\card_data.txt', 'r', encoding='utf-8') as file:
+    card_data_path = os.path.join(os.getcwd(), 'src', 'card_data.txt')
+    with open(card_data_path, 'r', encoding='utf-8') as file:
         card_data = file.read()
 
     # Split the card text into individual card entries (assuming each card is separated by a delimiter)
@@ -58,7 +59,7 @@ def main():
 
     # Loop through each card entry and parse/store the data
     for card_entry in card_entries:
-        parsed_card_data = extract_card_fields(card_entry)
+        parsed_card_data = extract_card_fields(card_entry)  # Assuming you have a function named extract_card_fields
 
         # Store the parsed data in the database
         cursor = conn.cursor()
@@ -90,7 +91,7 @@ def main():
                 legalities,
                 regulationMark,
                 images
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ''', (
             parsed_card_data['id'],
             parsed_card_data['name'],

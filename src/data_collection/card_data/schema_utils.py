@@ -1,9 +1,32 @@
-# src/utils/schema_utils.py
+# Filename: schema_utils.py
+
 import os
 import json
 import pandas as pd
+from pathlib import Path
+from common_utils import load_set_attributes_data
+from create_pandas_schema import load_set_attributes_data
 
-def get_set_schema():
+# Import the load_set_attributes_data function from create_pandas_schema.py
+from create_pandas_schema import load_set_attributes_data
+
+# Get the current directory using pathlib
+current_dir = Path(__file__).parent
+
+# Define the project root directory (two levels up from the current script's directory)
+project_root = current_dir.parent.parent  # Adjusted to move up two levels
+
+# Corrected file path for set_data_path
+set_data_path = project_root / 'data' / 'pokemon-tcg-data' / 'sets' / 'en.json'
+
+# Call the function with the corrected path
+set_attributes_data = load_set_attributes_data(set_data_path)
+
+def get_set_schema(current_dir):
+    # Update the path to the JSON data files using pathlib
+    # Get the current script's directory
+    current_dir = Path(__file__).resolve().parent
+
     return {
         # Define your set schema here
         'set_id': str,
@@ -22,7 +45,7 @@ def get_set_schema():
         'set_images': {'set_symbol': str, 'set_logo': str},
     }
 
-def get_card_schema():
+def get_card_schema(current_dir):
     return {
         # Define your card schema here
         'id': str,
@@ -73,10 +96,14 @@ def get_card_schema():
         'images': {'small': str, 'large': str},
     }
 
-def load_set_attributes_data(set_data_path):
-    with open(set_data_path, 'r', encoding='utf-8') as set_json_file:
-        set_attributes_data = json.load(set_json_file)
-    return set_attributes_data
+# Get the current directory using pathlib
+current_dir = Path(__file__).parent
+
+# Corrected file path for set_data_path
+set_data_path = project_root / 'data' / 'pokemon-tcg-data' / 'sets' / 'en.json'
+
+# Call the function with the corrected path
+set_attributes_data = load_set_attributes_data(set_data_path)
 
 def create_empty_card_dataframe(card_schema):
     return pd.DataFrame(columns=card_schema.keys())

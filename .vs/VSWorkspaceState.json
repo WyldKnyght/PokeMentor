@@ -2,15 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\admin",
-    "\\config",
-    "\\data",
-    "\\data\\deck_builder",
-    "\\data\\parsed_card_data",
-    "\\data\\pokemon_tcg_rules",
     "\\src",
+    "\\src\\card_tracker",
     "\\src\\data_collection",
-    "\\src\\data_collection\\web_scrape_process_save"
+    "\\src\\data_collection\\card_data"
   ],
-  "SelectedNode": "\\src\\data_collection\\web_scrape_process_save\\validate_url_text_list.py",
+  "SelectedNode": "\\src\\data_collection\\card_data\\create_pandas_schema.py",
   "PreviewInSolutionExplorer": false
 }

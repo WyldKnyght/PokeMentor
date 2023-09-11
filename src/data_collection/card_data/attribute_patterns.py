@@ -1,5 +1,7 @@
+# attribute_patterns.py
 import re
 
+# Regular expressions to extract various attributes from card text
 id_pattern = re.compile(r"ID: (.+?)(?=(?:ID:|$))")
 name_pattern = re.compile(r"Name: (.+?)(?=(?:Name:|$))")
 supertype_pattern = re.compile(r"Supertype: (.+?)(?=(?:Supertype:|$))")
