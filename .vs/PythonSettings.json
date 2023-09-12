@@ -1,4 +1,4 @@
 {
   "SuppressEnvironmentCreationPrompt": true,
-  "Interpreter": "Global|VisualStudio|Scripts"
+  "Interpreter": "Workspace|Workspace|.venv"
 }

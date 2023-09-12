@@ -1,3 +1,5 @@
+# store_parsed_data_db.py
+
 import sqlite3
 import re
 import os
@@ -5,41 +7,40 @@ from src.data_collection.card_data import attribute_patterns as patterns  # Upda
 
 # Function to create or connect to the SQLite database
 def create_database(db_path):
-    conn = sqlite3.connect(db_path)
-    cursor = conn.cursor()
-    # Create a table for storing parsed card data
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS pokemon_cards (
-            id TEXT PRIMARY KEY,
-            name TEXT,
-            supertype TEXT,
-            subtypes TEXT,
-            hp TEXT,
-            types TEXT,
-            evolvesFrom TEXT,
-            evolvesTo TEXT,
-            rulesList TEXT,
-            ancientTraitName TEXT,
-            ancientTraitText TEXT,
-            abilities TEXT,
-            attacks TEXT,
-            weaknesses TEXT,
-            resistences TEXT,
-            retreatCost TEXT,
-            convertedRetreatCost INTEGER,
-            cardSet TEXT,
-            number TEXT,
-            artist TEXT,
-            rarity TEXT,
-            flavorText TEXT,
-            nationalPokedexNumbers TEXT,
-            legalities TEXT,
-            regulationMark TEXT,
-            images TEXT
-        )
-    ''')
-    conn.commit()
-    return conn
+    with sqlite3.connect(db_path) as conn:
+        cursor = conn.cursor()
+        # Create a table for storing parsed card data
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS pokemon_cards (
+                id TEXT PRIMARY KEY,
+                name TEXT,
+                supertype TEXT,
+                subtypes TEXT,
+                hp TEXT,
+                types TEXT,
+                evolvesFrom TEXT,
+                evolvesTo TEXT,
+                rulesList TEXT,
+                ancientTraitName TEXT,
+                ancientTraitText TEXT,
+                abilities TEXT,
+                attacks TEXT,
+                weaknesses TEXT,
+                resistences TEXT,
+                retreatCost TEXT,
+                convertedRetreatCost INTEGER,
+                cardSet TEXT,
+                number TEXT,
+                artist TEXT,
+                rarity TEXT,
+                flavorText TEXT,
+                nationalPokedexNumbers TEXT,
+                legalities TEXT,
+                regulationMark TEXT,
+                images TEXT
+            )
+        ''')
+        conn.commit()
 
 # Main function to parse and store card data in the database
 def main():
@@ -47,7 +48,7 @@ def main():
     db_path = os.path.join(os.getcwd(), 'data', 'parsed_card_data', 'pokemon_cards.db')
 
     # Create or connect to the database
-    conn = create_database(db_path)
+    create_database(db_path)
 
     # Read the card text data (replace with your data source)
     card_data_path = os.path.join(os.getcwd(), 'src', 'card_data.txt')
@@ -58,12 +59,42 @@ def main():
     card_entries = card_data.split('\n\n')
 
     # Loop through each card entry and parse/store the data
+    parsed_card_data_list = []
     for card_entry in card_entries:
         parsed_card_data = extract_card_fields(card_entry)  # Assuming you have a function named extract_card_fields
+        parsed_card_data_list.append((
+            parsed_card_data['id'],
+            parsed_card_data['name'],
+            parsed_card_data['supertype'],
+            ', '.join(parsed_card_data['subtypes']),
+            parsed_card_data['hp'],
+            ', '.join(parsed_card_data['types']),
+            parsed_card_data['evolvesFrom'],
+            ', '.join(parsed_card_data['evolvesTo']),
+            ', '.join(parsed_card_data['rules_list']),
+            parsed_card_data['ancientTrait']['name'],
+            parsed_card_data['ancientTrait']['text'],
+            ', '.join([f"{ability['name']} ({ability['type']}): {ability['text']}" for ability in parsed_card_data['abilities']]),
+            ', '.join([f"{attack['name']} ({attack['cost']}): {attack['damage']} - {attack['text']}" for attack in parsed_card_data['attacks']]),
+            ', '.join([f"{weakness['type']} {weakness['value']}" for weakness in parsed_card_data['weaknesses']]),
+            ', '.join([f"{resistance['type']} {resistance['value']}" for resistance in parsed_card_data['resistances']]),
+            parsed_card_data['retreatCost'],
+            parsed_card_data['convertedRetreatCost'],
+            parsed_card_data['card_set']['set_name'],
+            parsed_card_data['number'],
+            parsed_card_data['artist'],
+            parsed_card_data['rarity'],
+            parsed_card_data['flavorText'],
+            ', '.join(parsed_card_data['nationalPokedexNumbers']),
+            f"Unlimited: {parsed_card_data['legalities']['unlimited']}, Standard: {parsed_card_data['legalities']['standard']}, Expanded: {parsed_card_data['legalities']['expanded']}",
+            parsed_card_data['regulationMark'],
+            ', '.join([f"{image['imageUrl']} ({image['imageType']})" for image in parsed_card_data['images']])
+        ))
 
-        # Store the parsed data in the database
+    # Store the parsed data in the database
+    with sqlite3.connect(db_path) as conn:
         cursor = conn.cursor()
-        cursor.execute('''
+        cursor.executemany('''
             INSERT OR REPLACE INTO pokemon_cards (
                 id,
                 name,
@@ -92,37 +123,8 @@ def main():
                 regulationMark,
                 images
             ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        ''', (
-            parsed_card_data['id'],
-            parsed_card_data['name'],
-            parsed_card_data['supertype'],
-            ', '.join(parsed_card_data['subtypes']),
-            parsed_card_data['hp'],
-            ', '.join(parsed_card_data['types']),
-            parsed_card_data['evolvesFrom'],
-            ', '.join(parsed_card_data['evolvesTo']),
-            ', '.join(parsed_card_data['rules_list']),
-            parsed_card_data['ancientTrait']['name'],
-            parsed_card_data['ancientTrait']['text'],
-            ', '.join([f"{ability['name']} ({ability['type']}): {ability['text']}" for ability in parsed_card_data['abilities']]),
-            ', '.join([f"{attack['name']} ({attack['cost']}): {attack['damage']} - {attack['text']}" for attack in parsed_card_data['attacks']]),
-            ', '.join([f"{weakness['type']} {weakness['value']}" for weakness in parsed_card_data['weaknesses']]),
-            ', '.join([f"{resistance['type']} {resistance['value']}" for resistance in parsed_card_data['resistances']]),
-            parsed_card_data['retreatCost'],
-            parsed_card_data['convertedRetreatCost'],
-            parsed_card_data['card_set']['set_name'],
-            parsed_card_data['number'],
-            parsed_card_data['artist'],
-            parsed_card_data['rarity'],
-            parsed_card_data['flavorText'],
-            ', '.join(parsed_card_data['nationalPokedexNumbers']),
-            f"Unlimited: {parsed_card_data['legalities']['unlimited']}, Standard: {parsed_card_data['legalities']['standard']}, Expanded: {parsed_card_data['legalities']['expanded']}",
-            parsed_card_data['regulationMark'],
-            ', '.join([f"{image['imageUrl']} ({image['imageType']})" for image in parsed_card_data['images']])
-        ))
+        ''', parsed_card_data_list)
         conn.commit()
-
-    conn.close()
 
 if __name__ == "__main__":
     main()

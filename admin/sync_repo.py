@@ -1,18 +1,25 @@
 import os
 import subprocess
+from pathlib import Path
 
 # Define the path to your local repository and the GitHub URL
-local_repo_path = r"M:\DEV_Projects\PokeMentor"
+local_repo_path = Path(r"M:\DEV_Projects\PokeMentor")
 github_repo_url = "https://github.com/WyldKnyght/PokeMentor"
 
 # Change to the repository directory
 os.chdir(local_repo_path)
 
 # Pull changes from the remote repository and push local changes
-subprocess.run(
-    "git pull && git add . && git commit -m 'Automated commit' && git push origin main",
-    shell=True,
-    check=True,
-)
+cmd = ["git", "pull"]
+subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=local_repo_path).communicate()
+
+cmd = ["git", "add", "."]
+subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=local_repo_path).communicate()
+
+cmd = ["git", "commit", "-m", "Automated commit"]
+subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=local_repo_path).communicate()
+
+cmd = ["git", "push", "origin", "main"]
+subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=local_repo_path).communicate()
 
 print("Sync completed successfully!")
