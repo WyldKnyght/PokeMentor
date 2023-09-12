@@ -1,40 +1,45 @@
-# Filename: create_pandas_schema.py
-
-import sys
-import os
-import pandas as pd
-import json
-from schema_utils import get_set_schema, get_card_schema, create_empty_card_dataframe
 import glob
+import json
+import pandas as pd
+from define_paths import card_data_folder, parquet_path, project_root
+from schema_utils import get_card_schema, create_empty_card_dataframe
 
-# Get the project root directory (two levels up from the current script's directory)
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
-# Add the project root directory to the Python path
-sys.path.append(project_root)
+def load_json_files_to_dataframe():
+    """
+    Load JSON files from a folder into a Pandas DataFrame.
 
-# Import schema-related functions using absolute import
-from schema_utils import load_set_attributes_data
+    Returns:
+        pd.DataFrame: Combined DataFrame from JSON files.
+    """
+    json_files = glob.glob(f"{card_data_folder}/*.json")
+    dataframes = []
 
-# Adjust the path to the JSON data files using os.path.join()
-set_data_path = os.path.join(project_root, 'data', 'pokemon-tcg-data', 'sets', 'en.json')
+    for json_file in json_files:
+        with open(json_file, 'r', encoding='utf-8') as file:
+            data = json.load(file)
+            dataframes.append(pd.json_normalize(data))
 
-# Corrected path to the card data folder using os.path.join()
-card_data_folder = os.path.join(project_root, 'data', 'pokemon-tcg-data', 'cards', 'en')
+    if dataframes:
+        return pd.concat(dataframes, ignore_index=True)
+    else:
+        return pd.DataFrame()
 
-# Load set schema and card schema using functions from schema_utils.py
-set_schema = get_set_schema(project_root)
-card_schema = get_card_schema(project_root)
 
-# Create an empty DataFrame for card data based on the card schema
-card_df = create_empty_card_dataframe(card_schema)
+def main():
+    # Create an empty DataFrame for card data based on the card schema
+    card_schema = get_card_schema(project_root)
+    create_empty_card_dataframe(card_schema)  # Removed unused card_df variable
 
-# Initialize an empty list to store valid card data
-valid_card_data_list = [pd.json_normalize(json.loads(open(f, 'r', encoding='utf-8').read())) for f in glob.glob(os.path.join(card_data_folder, '*.json')) if json.loads(open(f, 'r', encoding='utf-8').read())]
+    # Load JSON data into a Pandas DataFrame
+    valid_card_data_df = load_json_files_to_dataframe()
 
-# Concatenate the list of DataFrames into a single DataFrame with a sequential index
-valid_card_data_df = pd.concat(valid_card_data_list, ignore_index=True)
+    if not valid_card_data_df.empty:
+        # Save the DataFrame to a Parquet file for better performance and storage efficiency
+        valid_card_data_df.to_parquet(parquet_path, index=False, compression='snappy')
+    else:
+        print("No valid card data found in JSON files.")
 
-# Save the DataFrame to a Parquet file for better performance and storage efficiency
-parquet_path = os.path.join(os.path.dirname(__file__), 'card_schema.parquet')
-valid_card_data_df.to_parquet(parquet_path, index=False, compression='snappy')
+
+if __name__ == "__main__":
+    main()

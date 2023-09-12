@@ -9,6 +9,8 @@ github_repo_url = "https://github.com/WyldKnyght/PokeMentor"
 # Change to the repository directory
 os.chdir(local_repo_path)
 
+cmd = ["git", "rm", "-r", "--cached", ".vs"]
+subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=local_repo_path).communicate()
 # Pull changes from the remote repository and push local changes
 cmd = ["git", "pull"]
 subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, cwd=local_repo_path).communicate()

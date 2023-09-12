@@ -3,15 +3,7 @@
 import json
 import pandas as pd
 from pathlib import Path
-
-# Get the current directory using pathlib
-current_dir = Path(__file__).parent
-
-# Define the project root directory (two levels up from the current script's directory)
-project_root = current_dir.parent.parent  # Adjusted to move up two levels
-
-# Corrected file path for set_data_path
-set_data_path = project_root / 'data' / 'pokemon-tcg-data' / 'sets' / 'en.json'
+from define_paths import set_data_folder  # Import the set_data_folder path
 
 def load_set_attributes_data(set_data_path):
     # Load the set attributes data from a JSON file
@@ -19,17 +11,7 @@ def load_set_attributes_data(set_data_path):
         set_attributes_data = json.load(set_json_file)
     return set_attributes_data
 
-def load_data(file_path):
-    # Load the set attributes_data from a JSON file
-    with open(file_path, 'r', encoding='utf-8') as set_json_file:
-        set_attributes_data = json.load(set_json_file)
-    return set_attributes_data
-
 def get_set_schema(current_dir):
-    # Update the path to the JSON data files using pathlib
-    # Get the current script's directory
-    current_dir = Path(__file__).resolve().parent
-
     return {
         # Define your set schema here
         'set_id': str,
@@ -99,13 +81,10 @@ def get_card_schema(current_dir):
         'images': {'small': str, 'large': str},
     }
 
-# Get the current directory using pathlib
-current_dir = Path(__file__).parent
+# Update the set_data_path to use set_data_folder
+set_data_path = set_data_folder
 
-# Corrected file path for set_data_path
-set_data_path = project_root / 'data' / 'pokemon-tcg-data' / 'sets' / 'en.json'
-
-# Call the function with the corrected path
+# Call the function to load set attributes data
 set_attributes_data = load_set_attributes_data(set_data_path)
 
 def create_empty_card_dataframe(card_schema):
