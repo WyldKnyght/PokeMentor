@@ -164,5 +164,5 @@ M:/DEV_Projects/PokeMentor/data/pokemon-tcg-data/
 data/pokemon-tcg-data/
 
 # Visual Studio and VS code
-"M:\DEV_Projects\PokeMentor\%DEV_Projects%PokeMentor"
-"M:\DEV_Projects\PokeMentor\.vs"
+M:\DEV_Projects\PokeMentor\%DEV_Projects%PokeMentor
+M:\DEV_Projects\PokeMentor\.vs
